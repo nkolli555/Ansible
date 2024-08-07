@@ -4,22 +4,34 @@
   become: true
   tasks:
 
-  - name: update repo index; install apache2, php & net-tools packages
+  - name: install updates (Ubuntu)
     apt:
-      update_cache: yes      
+      update_cache: yes
+      upgrade: dist
+    when: ansible_distribution == "Ubuntu"
+
+  - name: install updates (Fedora)
+    dnf:
+      update_cache: yes
+      update_only: yes
+    when: ansible_distribution == "Fedora"
+
+- hosts: web_servers
+  become: true
+  tasks:
+
+  - name: install apache2, php packages for Ubuntu Web servers
+    apt:
       name: 
         - apache2
         - libapache2-mod-php
-        - net-tools
       state: latest
     when: ansible_distribution == "Ubuntu"
 
-  - name: update repo index; install httpd, php & net-tools packages
+  - name: install httpd, php packages for Fedora Web servers
     dnf:
-      update_cache: yes      
       name: 
         - httpd
         - php
-        - net-tools
       state: latest
     when: ansible_distribution == "Fedora"
