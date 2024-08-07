@@ -4,22 +4,11 @@
   become: true
   tasks:
 
-  - name: update repo index; install apache2, php & net-tools packages
-    apt:
+  - name: update repo index; install apache, php & net-tools packages
+    package:
       update_cache: yes      
       name: 
-        - apache2
-        - libapache2-mod-php
+        - {{ apache_pkg }}
+        - {{ php_pkg }}
         - net-tools
       state: latest
-    when: ansible_distribution == "Ubuntu"
-
-  - name: update repo index; install httpd, php & net-tools packages
-    dnf:
-      update_cache: yes      
-      name: 
-        - httpd
-        - php
-        - net-tools
-      state: latest
-    when: ansible_distribution == "Fedora"
