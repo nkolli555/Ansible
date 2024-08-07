@@ -9,21 +9,12 @@
       update_cache: yes      
     when: ansible_distribution in ["Ubuntu", "Debian"]
 
-  - name: install apache2 package
+  - name: install apache2 along with php support and net-tools packages
     apt: 
-      name: apache2
-      state: latest
-    when: ansible_distribution == "Ubuntu"
-
-  - name: add php support for apache2
-    apt:
-      name: libapache2-mod-php
-      state: latest
-    when: ansible_distribution == "Ubuntu"
-
-  - name: install net-tools for ifconfig
-    apt:
-      name: net-tools
+      name: 
+        - apache2
+        - libapache2-mod-php
+        - net-tools
       state: latest
     when: ansible_distribution == "Ubuntu"
 
@@ -32,20 +23,11 @@
       update_cache: yes      
     when: ansible_distribution == "Fedora"
 
-  - name: install httpd package
+  - name: install httpd along with php support and net-tools packages 
     dnf: 
-      name: httpd
-      state: latest
-    when: ansible_distribution == "Fedora"
-
-  - name: add php support for httpd
-    dnf:
-      name: php
-      state: latest
-    when: ansible_distribution == "Fedora"
-
-  - name: install net-tools for ifconfig
-    dnf:
-      name: net-tools
+      name: 
+        - httpd
+        - php
+        - net-tools
       state: latest
     when: ansible_distribution == "Fedora"
