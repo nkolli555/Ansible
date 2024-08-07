@@ -1,4 +1,4 @@
-172.24.51.253 apache_pkg=apache2 php_pkg=libapache2-mod-php
-172.24.51.252 apache_pkg=apache2 php_pkg=libapache2-mod-php
-172.24.51.251 apache_pkg=apache2 php_pkg=libapache2-mod-php
-172.24.51.250 apache_pkg=httpd php_pkg=php
+172.24.51.253
+172.24.51.252
+172.24.51.251
+172.24.51.250
