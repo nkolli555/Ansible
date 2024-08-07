@@ -19,7 +19,6 @@
 - hosts: web_servers
   become: true
   tasks:
-
   - name: install apache2, php packages for Ubuntu Web servers
     apt:
       name: 
