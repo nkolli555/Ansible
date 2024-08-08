@@ -2,7 +2,7 @@
 
 - hosts: all
   become: true
-  tasks:
+  pre_tasks:
 
   - name: install updates (Ubuntu)
     apt:
@@ -19,7 +19,8 @@
 - hosts: web_servers
   become: true
   tasks:
-  - name: install apache2, php packages for Ubuntu Web servers
+
+  - name: install apache2, php packages for Web servers (Ubuntu)
     apt:
       name: 
         - apache2
@@ -27,10 +28,32 @@
       state: latest
     when: ansible_distribution == "Ubuntu"
 
-  - name: install httpd, php packages for Fedora Web servers
+  - name: install httpd, php packages for Web servers (Fedora)
     dnf:
       name: 
         - httpd
         - php
       state: latest
     when: ansible_distribution == "Fedora"
+
+- hosts: db_servers
+  become: true
+  tasks:
+
+  - name: install mariadb pkg (Ubuntu)
+    apt:
+      name: mariadb-server
+      state: latest
+    when: ansible_distribution == "Ubuntu"
+
+- hosts: file_servers
+  become: true
+  tasks:
+  
+  - name: install samba package
+    package:
+      name: samba
+      state: latest
+
+
+
