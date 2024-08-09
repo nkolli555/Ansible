@@ -1,14 +1,17 @@
 import paramiko as prmk
 import time
+import csv
 from colors import colors
 
-print('#' * 50)
+print('\n' * 2 + '#' * 50 + '\n' * 2)
 
 ssh = prmk.SSHClient()
 
 ssh.set_missing_host_key_policy(prmk.AutoAddPolicy())
 
-servers = ['172.24.51.250', '172.24.51.251', '172.24.51.252', '172.24.51.253', '172.24.51.249', '172.24.51.248'] 
+with open('ipaddr.txt', 'r') as file:
+
+    servers = [line.strip() for line in file]
 
 for server in servers:
 
